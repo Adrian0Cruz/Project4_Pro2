@@ -1,6 +1,6 @@
 //01 - 05 -2024
 //esta clase tambien era para ayudar a Hernán con una vaina de factorial
-package programacion2_pro4;
+package Ui;
 //@author Jesús Hernández
 public class View extends javax.swing.JFrame {
     public View() {
