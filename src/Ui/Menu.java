@@ -16,6 +16,8 @@ public class Menu extends javax.swing.JFrame {
         
         V.setSize(700, 500);
         V.setLocation(0, 100);
+        
+        R.V2 = V;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
         But_Exit.setBackground(new java.awt.Color(255, 255, 255));
         But_Exit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         But_Exit.setForeground(new java.awt.Color(255, 0, 0));
+        But_Exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Logout.png"))); // NOI18N
         But_Exit.setText("X");
         But_Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
