@@ -205,9 +205,14 @@ public class Register extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
             if ( GetGra.getSelectedIndex ( ) == 0 ) {
-            JOptionPane.showMessageDialog(this,
-                    "No Haz Seleccionado El Grado", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
+                JOptionPane.showMessageDialog(this,
+                        "No Haz Seleccionado El Grado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if ( GetAge.getText (  ).equals( "Edad" )) {
+                JOptionPane.showMessageDialog(this,
+                        "No Haz Seleccionado La Edad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             if ( GetId.getText ( ).isBlank ( ) ) {
                 throw new RuntimeException ( "La Identificación No Puede Estar Vacia" );
@@ -228,9 +233,11 @@ public class Register extends javax.swing.JPanel {
             GetId.setText ( "" );
             GetName.setText ( "" );
             GetGen.setSelectedIndex ( 0 );
+            
+            GetId.grabFocus (  );
         }catch (Exception E){
-            JOptionPane.showMessageDialog(this,
-                    E, "ERROR", JOptionPane.ERROR_MESSAGE);
+            /*JOptionPane.showMessageDialog(this,
+                    E, "ERROR", JOptionPane.ERROR_MESSAGE);*/
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

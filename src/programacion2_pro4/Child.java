@@ -48,9 +48,9 @@ public class Child {
     @Override
     public String toString ( ) {
         return  "Grado: " + Grade + 
-                "\nAge=" + Age + 
-                "\nId=" + Id + 
-                "\nName=" + Name + 
-                "\nGender=" + Gender + '}';
+                "\nEdad: " + Age + 
+                "\nIdentificacion: " + Id + 
+                "\nNombre: " + Name + 
+                "\nGenero: " + Gender + '}';
     }   
 }

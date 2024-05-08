@@ -18,6 +18,7 @@ public class Menu extends javax.swing.JFrame {
         V.setLocation(0, 100);
         
         R.V2 = V;
+        V.L2 = R.L;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

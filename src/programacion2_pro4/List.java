@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class List {
     Child Cab;
-    //Child Info;
     public List (  ) { Cab = null; }
     private boolean Empty (  ) { return Cab == null; }
 
@@ -25,6 +24,16 @@ public class List {
                 else A = A.Sig;
             } while ( A != Cab );
             return null;
+        }
+    }
+    
+    public void ShowInfo ( int Cod ) {
+        Child B = SearchCod ( Cod );
+        if ( B == null )JOptionPane.showMessageDialog(null,
+                "El código buscado no existe!!");
+        else{
+            JOptionPane.showMessageDialog(null,
+                    "El Niño Con El Id" + Cod + " Es:\n" + B.toString (  ) );
         }
     }
 
@@ -56,7 +65,7 @@ public class List {
             JOptionPane.showMessageDialog(null,
                     "No Se Pudo Añadir Al Niño" + E, "Error", JOptionPane.ERROR_MESSAGE);
             JJTFId.setText ( "" );
-            JJTFId.grabFocus ( );
+            JJTFId.grabFocus (  );
             return null;
         }
     }
@@ -79,7 +88,6 @@ public class List {
                 Cab.Sig = Cab;
                 JOptionPane.showMessageDialog(null,
                     "Elemento registrado, la lista estaba vacía.");
-                System.out.println("1");
             }else{
                 Child U = Lasted (  ) ;
                 Info.Sig = Cab;
@@ -87,13 +95,30 @@ public class List {
                 U.Sig = Cab;
                 JOptionPane.showMessageDialog(null,
                     "Elemento registrado al inicio.");
-                System.out.println("2");
             }
         }
     }
     
-    private void RegistrarTable ( DefaultTableModel Model, int Ft,
-            Child P ) {
+    public void AddF ( JComboBox JCBGrade, JLabel JLAge, JTextField JJTFId,
+            JTextField JFTName, JComboBox JCBGender ){
+        Child Info = Created (  JCBGrade, JLAge, JJTFId, JFTName, JCBGender);
+        if ( Info != null ){
+            if ( Empty (  ) ) {
+                Cab = Info;
+                Cab.Sig = Cab;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento registrado, la lista estaba vacía.");
+            } else {
+                Child U = Lasted (  );
+                U.Sig = Info;
+                Info.Sig = Cab;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento registrado al final.");
+            }
+        }
+    }
+    
+    private void RegistrarTable ( DefaultTableModel Model, int Ft, Child P ) {
         Model.setValueAt ( P.getGrade (  ), Ft, 0 );
         Model.setValueAt ( P.getAge (  ), Ft, 1 );
         Model.setValueAt ( P.getId (  ), Ft, 2 );
@@ -104,7 +129,7 @@ public class List {
     public void LLenarTabla( JTable tab ) {
         int posFilaT = 0; //Este índice recorre los elementos de la fila Tabla
         Child p = Cab;  //Este nodo me mueve posición x posición en la lista
-        DefaultTableModel Modelo = new DefaultTableModel (  ){
+        DefaultTableModel Modelo = new DefaultTableModel (  ) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -117,19 +142,62 @@ public class List {
         Modelo.addColumn ( "Nombre" );
         Modelo.addColumn ( "Genero" );
 
+        if ( p == null ) {
+            tab.setModel ( Modelo );
+            return;
+        }
         do{
+            
             Modelo.addRow ( new Object [ ] { "", "", "", "", "" } );
             RegistrarTable ( Modelo, posFilaT, p );
             p = p.Sig;
             posFilaT++;
-        } while ( p != Cab );
-        /*while ( p != Cab ) {
-            Modelo.addRow ( new Object [ ] { "", "", "", "", "" } );
-            RegistrarTable ( Modelo, posFilaT, p );
-            p = p.Sig;
-            System.out.println("suka2");
-            posFilaT++;
-        }esto no funciona */
+        } while ( p != Cab && p != null);
         tab.setModel ( Modelo );
+    }
+    
+    public Child Previous ( Child P ) {
+        if ( Empty (  ) ) return null;
+        else{
+            Child Q = Cab;
+            while ( Q.Sig != P ) Q = Q.Sig;
+            return Q;
+        }    
+    }
+    
+    public void EliminatedCod( int cod ) {
+        Child B = SearchCod ( cod ), U, A;
+        if ( B == null )
+            JOptionPane.showMessageDialog(null, 
+                "El código a eliminar no existe!");
+        else{
+            if ( B == Cab  &&  Cab.Sig == Cab ) {
+                Cab = null;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento eliminado, la lista esta vacía");
+            } else if ( B == Cab  &&  Cab.Sig != Cab ) {
+                U = Lasted (  );
+                Cab = Cab.Sig;
+                U.Sig = Cab;
+                B.Sig = null;
+                B = null;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento eliminado del Inicio De La Lista");
+            } else if ( B.Sig == Cab ) {
+                A = Previous ( B );
+                A.Sig = Cab;
+                B.Sig = null;
+                B = null;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento eliminado dek Final De La Lista");
+            } else {
+                A = Previous ( B );
+                A.Sig = B.Sig;
+                B.Sig = null;
+                B = null;
+                JOptionPane.showMessageDialog(null,
+                    "Elemento eliminado entre dos nodos.");
+            }
+        }
     }
 }
