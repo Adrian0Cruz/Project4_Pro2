@@ -51,6 +51,6 @@ public class Child {
                 "\nEdad: " + Age + 
                 "\nIdentificacion: " + Id + 
                 "\nNombre: " + Name + 
-                "\nGenero: " + Gender + '}';
+                "\nGenero: " + Gender;
     }   
 }

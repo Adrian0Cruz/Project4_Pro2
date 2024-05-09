@@ -1,5 +1,6 @@
 package Ui;
 //@author Jesús Hernández
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import programacion2_pro4.*;
 
@@ -8,6 +9,9 @@ public class Register extends javax.swing.JPanel {
     View V2;
     public Register () {
         initComponents();
+    }
+    public JButton RjButton1(){
+        return jButton1;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

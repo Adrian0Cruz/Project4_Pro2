@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -152,7 +153,7 @@ public class List {
             RegistrarTable ( Modelo, posFilaT, p );
             p = p.Sig;
             posFilaT++;
-        } while ( p != Cab && p != null);
+        } while ( p != Cab && p != null );
         tab.setModel ( Modelo );
     }
     
@@ -199,5 +200,44 @@ public class List {
                     "Elemento eliminado entre dos nodos.");
             }
         }
+    }
+    
+    public int CountChild ( String Grade, String Gender ) {
+        int C = 0;
+        Child D = Cab;
+        do {
+            if ( D.getGrade (  ).equals ( Grade ) && D.getGender (  ).equals ( Gender ) ) C++;
+            D = D.Sig;
+        } while ( D != Cab );
+        return C;
+    }
+    
+    public void ShowList ( JTextArea TA, String Grade ) {
+        if ( Empty (  ) ) {
+            JOptionPane.showMessageDialog (null,
+                    "La Lista Esta Vacia");
+            return;
+        }
+        Child G = Cab;
+        TA.setText ( "" );
+        TA.append ( "Los Nombres De los Niños"
+                + "\nQue Estan En El Grado "+ "\n" + Grade + " Son: \n" );
+        do{
+            if ( G.getGrade().equals(Grade) )
+                TA.append ( G.getName (  ) + "\n");
+            G = G.Sig; 
+        } while ( G != Cab );
+    }
+    
+    public double Promedio ( String Gender ) {
+        Child E = Cab;
+        int Cant = 0;
+        int Edad = 0;
+        do {
+            if ( E.getGender (  ).equals ( Gender )  ) Edad += E.getAge (  );
+            Cant++;
+            E = E.Sig;
+        } while ( E != Cab );
+        return Edad / Cant;
     }
 }

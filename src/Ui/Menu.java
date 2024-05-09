@@ -2,14 +2,20 @@
 //esta clase tambien era para ayudar a Hernán con una vaina de factorial
 package Ui;
 //@author Jesús Hernández
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class Menu extends javax.swing.JFrame {
     Register R;
     View V;
+    General G;
     int X, Y;
     public Menu() {
-        initComponents();
-        R = new Register();
-        V = new View();
+        initComponents (  );
+        R = new Register (  );
+        V = new View (  );
+        G = new General (  );
         
         R.setSize(700, 500);
         R.setLocation(0, 100);
@@ -17,9 +23,48 @@ public class Menu extends javax.swing.JFrame {
         V.setSize(700, 500);
         V.setLocation(0, 100);
         
+        G.setSize(700, 500);
+        G.setLocation(0, 100);
+        
         R.V2 = V;
         V.L2 = R.L;
+        G.L3 = R.L;
+        
+        R.RjButton1().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent E){
+                R.setVisible(false);
+                jPanel2.setVisible(true);
+            }
+        });
+        
+        V.RjButton1().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent E){
+                V.setVisible(false);
+                jPanel2.setVisible(true);
+            }
+        });
+        
+        V.RGen_List().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent E){
+                add ( G );
+                V.setVisible ( false );
+                G.setVisible ( true );
+            }
+        });
+        
+        G.Rback().addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent E){
+                add ( G );
+                G.setVisible ( false );
+                V.setVisible ( true );
+            }
+        });
     }
+        
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
