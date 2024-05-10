@@ -3,7 +3,11 @@
 package programacion2_pro4;
 //@author Jesús Hernández
 import java.awt.HeadlessException;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -220,11 +224,14 @@ public class List {
         }
         Child G = Cab;
         TA.setText ( "" );
-        TA.append ( "Los Nombres De los Niños"
-                + "\nQue Estan En El Grado "+ "\n" + Grade + " Son: \n" );
+        TA.append ( """
+                    Los Nombres De los Ni\u00f1os
+                    Que Estan En El Grado 
+                    """ + Grade + " Son: \n\n" );
+        int P = 1;
         do{
             if ( G.getGrade().equals(Grade) )
-                TA.append ( G.getName (  ) + "\n");
+                TA.append ( P + " - " + G.getName (  ) + "\n");
             G = G.Sig; 
         } while ( G != Cab );
     }
@@ -239,5 +246,32 @@ public class List {
             E = E.Sig;
         } while ( E != Cab );
         return Edad / Cant;
+    }
+    
+    public void Txt (  ) {
+        JFileChooser Fc = new JFileChooser (  );
+        Fc.setCurrentDirectory ( new File ( System.getProperty ( "user.home" ) +
+                File.separator + "Downloads\\Programacion 2" ) );
+        Fc.setDialogTitle ( "Donde Desea Guardar El Archivo" );
+        Fc.setFileSelectionMode ( JFileChooser.DIRECTORIES_ONLY );
+        int Seleccion = Fc.showOpenDialog ( null );
+        if ( Seleccion == JFileChooser.APPROVE_OPTION ) {
+            File selectedFolder = Fc.getSelectedFile (  );
+            String fileName = selectedFolder + "\\Informe.txt";
+            String encoding = "UTF-8";
+            Child D = Cab;
+            try {
+                PrintWriter writer = new PrintWriter ( fileName, encoding );
+                if ( Empty() ) writer.println("No Hay Nada En La Lista");
+                do { 
+                    writer.println ( D.toString (  ) + "\n\n" );
+                    D = D.Sig;
+                } while ( D != Cab );
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("Ocurrió un error.");
+                e.printStackTrace();
+            }
+        }
     }
 }
