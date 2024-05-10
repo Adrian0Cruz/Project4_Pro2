@@ -10,7 +10,7 @@ public class Register extends javax.swing.JPanel {
     public Register () {
         initComponents();
     }
-    public JButton RjButton1(){
+    public JButton RjButton1 (  ) {
         return jButton1;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

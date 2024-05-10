@@ -101,7 +101,7 @@ public class List {
     }
     
     public void AddF ( JComboBox JCBGrade, JLabel JLAge, JTextField JJTFId,
-            JTextField JFTName, JComboBox JCBGender ){
+            JTextField JFTName, JComboBox JCBGender ) {
         Child Info = Created (  JCBGrade, JLAge, JJTFId, JFTName, JCBGender);
         if ( Info != null ){
             if ( Empty (  ) ) {
@@ -157,7 +157,7 @@ public class List {
         tab.setModel ( Modelo );
     }
     
-    public Child Previous ( Child P ) {
+    private Child Previous ( Child P ) {
         if ( Empty (  ) ) return null;
         else{
             Child Q = Cab;
