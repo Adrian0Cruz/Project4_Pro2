@@ -46,11 +46,13 @@ public class Child {
     
 
     @Override
-    public String toString ( ) {
+    public String toString (  ) {
         return  "Grado: " + Grade + 
                 "\nEdad: " + Age + 
                 "\nIdentificacion: " + Id + 
                 "\nNombre: " + Name + 
                 "\nGenero: " + Gender;
-    }   
+    }
+    
+    public String ToString (  ) { return Grade + " || " + Age + " || " + Id + " || " + Name + " || " + Gender; }
 }

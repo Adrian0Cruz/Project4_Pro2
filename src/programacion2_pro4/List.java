@@ -264,7 +264,7 @@ public class List {
                 PrintWriter writer = new PrintWriter ( fileName, encoding );
                 if ( Empty() ) writer.println("No Hay Nada En La Lista");
                 do { 
-                    writer.println ( D.toString (  ) + "\n\n" );
+                    writer.println ( D.ToString (  ) + "\n" );
                     D = D.Sig;
                 } while ( D != Cab );
                 writer.close();
