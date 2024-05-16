@@ -54,5 +54,5 @@ public class Child {
                 "\nGenero: " + Gender;
     }
     
-    public String ToString (  ) { return Grade + " || " + Age + " || " + Id + " || " + Name + " || " + Gender; }
+    public String ToString (  ) { return Grade + "||" + Age + "||" + Id + "||" + Name + "||" + Gender; }
 }

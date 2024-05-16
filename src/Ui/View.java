@@ -211,6 +211,7 @@ public class View extends javax.swing.JPanel {
         int X = Integer.parseInt ( jTable1.getValueAt ( jTable1.getSelectedRow (  ), 2).toString (  ) );
         L2.EliminatedCod ( X );
         L2.LLenarTabla ( jTable1 );
+        L2.Txt();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void But_InfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_But_InfoActionPerformed
@@ -219,7 +220,7 @@ public class View extends javax.swing.JPanel {
                     "No Has Seleccionado El Genero", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String[] opciones = {"CountChild", "Promedio", "Cancelar"};
+        String[] opciones = {"Numero De Niños", "Promedio", "Cancelar"};
         int Seleccion = JOptionPane.showOptionDialog(this, "Selecciona una opción:",
                 "Seleccione Informe", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0] );
@@ -230,12 +231,25 @@ public class View extends javax.swing.JPanel {
                             "No Has Seleccionado El Grado", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                L2.CountChild ( Grado.getSelectedItem (  ).toString (  ),
+                int Nc = L2.CountChild ( Grado.getSelectedItem (  ).toString (  ),
                         GetGen.getSelectedItem (  ).toString (  ) );
+                JOptionPane.showMessageDialog(this,
+                        "La Cantidad De Niños Del Genero " +
+                                GetGen.getSelectedItem (  ).toString (  ) +
+                                " Del Grado " + Grado.getSelectedItem (  ).toString (  )
+                                + " Es: " + Nc);
                 break;
             }
             case 1 ->{
-                L2.Promedio( GetGen.getSelectedItem().toString() );
+                double Pro = L2.Promedio( GetGen.getSelectedItem().toString() );
+                if ( Pro == 0 ) {
+                    JOptionPane.showMessageDialog(this,
+                            "No Hay Niñas Registradas En El Grado De Jardin Infantil");
+                } else 
+                    JOptionPane.showMessageDialog(this,
+                            "El Promedio De Edad Del Genero "
+                                    + GetGen.getSelectedItem().toString() +
+                                    " Es: " + Pro);
                 break;
             }
             case 2 ->{

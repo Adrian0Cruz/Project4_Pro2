@@ -3,16 +3,9 @@
 package programacion2_pro4;
 //@author Jesús Hernández
 import java.awt.HeadlessException;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class List {
@@ -230,8 +223,10 @@ public class List {
                     """ + Grade + " Son: \n\n" );
         int P = 1;
         do{
-            if ( G.getGrade().equals(Grade) )
+            if ( G.getGrade().equals(Grade) ) {
                 TA.append ( P + " - " + G.getName (  ) + "\n");
+                ++P;
+            }
             G = G.Sig; 
         } while ( G != Cab );
     }
@@ -241,37 +236,74 @@ public class List {
         int Cant = 0;
         int Edad = 0;
         do {
-            if ( E.getGender (  ).equals ( Gender )  ) Edad += E.getAge (  );
-            Cant++;
+            if ( E.getGender (  ).equals ( Gender )  ) {
+                Edad += E.getAge (  );
+                Cant++;
+            }
             E = E.Sig;
         } while ( E != Cab );
+        if ( Cant == 0 ) return 0;
         return Edad / Cant;
     }
     
     public void Txt (  ) {
-        JFileChooser Fc = new JFileChooser (  );
-        Fc.setCurrentDirectory ( new File ( System.getProperty ( "user.home" ) +
-                File.separator + "Downloads\\Programacion 2" ) );
-        Fc.setDialogTitle ( "Donde Desea Guardar El Archivo" );
-        Fc.setFileSelectionMode ( JFileChooser.DIRECTORIES_ONLY );
-        int Seleccion = Fc.showOpenDialog ( null );
-        if ( Seleccion == JFileChooser.APPROVE_OPTION ) {
-            File selectedFolder = Fc.getSelectedFile (  );
-            String fileName = selectedFolder + "\\Informe.txt";
-            String encoding = "UTF-8";
-            Child D = Cab;
-            try {
-                PrintWriter writer = new PrintWriter ( fileName, encoding );
-                if ( Empty() ) writer.println("No Hay Nada En La Lista");
-                do { 
-                    writer.println ( D.ToString (  ) + "\n" );
-                    D = D.Sig;
-                } while ( D != Cab );
-                writer.close();
-            } catch (IOException e) {
-                System.out.println("Ocurrió un error.");
-                e.printStackTrace();
+        String fileName = System.getProperty("user.home") + "\\Desktop\\Informe.txt";
+        String encoding = "UTF-8";
+        Child D = Cab;
+        try {
+            PrintWriter writer = new PrintWriter(fileName, encoding);
+            if ( Empty (  ) ) writer.println("No Hay Nada En La Lista");
+            do {
+                writer.println(D.ToString() + "\n///////////////////////////");
+                D = D.Sig;
+            } while (D != Cab);
+            writer.close();
+            /*File file = new File(fileName);
+            file.setReadOnly();*/
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error.");
+        }
+    }
+    
+    public void Import(JTable tab) throws FileNotFoundException, IOException {
+        File file = new File(System.getProperty("user.home") + "/Desktop\\Informe.txt");
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] split = line.split("\\|\\|");
+                    String Grade = split[0];
+                    int Age = Integer.parseInt(split[1]);
+                    int Id = Integer.parseInt(split[2]);
+                    String Name = split[3];
+                    String Gender = split[4];
+                    // Verifica si el ID ya ha sido procesado
+                    if (SearchCod(Id) == null) {
+                        Child nuevoElemento = new Child(Grade, Age, Id, Name, Gender);
+
+                        if (nuevoElemento != null) {
+                            if (Empty()) {
+                                Cab = nuevoElemento;
+                                Cab.Sig = Cab;
+                            } else {
+                                Child U = Lasted();
+                                U.Sig = nuevoElemento;
+                                nuevoElemento.Sig = Cab;
+                            }
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(null,
+                                "Hay Codigos Iguales: \n"
+                                +"Grado: " + Grade
+                                +"\nEdad: " + Age
+                                +"\nId: " + Id
+                                +"\nNombre: " + Name
+                                +"\nGenero: " + Gender);
+                    }
+                    LLenarTabla(tab);
+                }
             }
         }
     }
+
 }

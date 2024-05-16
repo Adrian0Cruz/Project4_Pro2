@@ -229,8 +229,28 @@ public class Register extends javax.swing.JPanel {
                         "No Haz Seleccionado El Genero", "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            L.AddS ( GetGra, GetAge, GetId, GetName, GetGen );
+            String[] opciones = {"Añadir Inicio", "Añadir Final", "Cancelar"};
+            int Seleccion = JOptionPane.showOptionDialog(this, "Selecciona una opción:",
+                    "Seleccione Informe", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+            switch ( Seleccion ) {
+                case 0 -> {
+                    L.AddS ( GetGra, GetAge, GetId, GetName, GetGen );
+                    break;
+                }
+                case 1 -> {
+                    L.AddF ( GetGra, GetAge, GetId, GetName, GetGen );
+                    break;
+                }
+                case 2 -> {
+                    JOptionPane.showMessageDialog(this ,
+                        "Cancelado");
+                    break;
+                }
+            }
+            
             L.LLenarTabla ( V2.jTable1 );
+            L.Txt();
             
             GetGra.setSelectedIndex ( 0 );
             GetAge.setText ( "Edad" );
@@ -239,10 +259,7 @@ public class Register extends javax.swing.JPanel {
             GetGen.setSelectedIndex ( 0 );
             
             GetId.grabFocus (  );
-        }catch (Exception E){
-            /*JOptionPane.showMessageDialog(this,
-                    E, "ERROR", JOptionPane.ERROR_MESSAGE);*/
-        }
+        } catch ( Exception E ){  }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

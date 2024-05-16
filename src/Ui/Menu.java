@@ -2,10 +2,9 @@
 //esta clase tambien era para ayudar a Hernán con una vaina de factorial
 package Ui;
 //@author Jesús Hernández
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
     Register R;
     View V;
@@ -63,6 +62,24 @@ public class Menu extends javax.swing.JFrame {
                 V.setVisible ( true );
             }
         });
+        
+        try {
+            String[] opciones = {"Yes/Si", "No"};
+            int Seleccion = JOptionPane.showOptionDialog(this, "Deasea Importar Los datos?",
+                    "Importar", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+            switch ( Seleccion ){
+                case 0 -> {
+                    R.L.Import(V.jTable1);
+                }
+                case 1 -> {
+                    JOptionPane.showMessageDialog(this,
+                            "No Se Importaron Los Datos Antiguos");
+                }
+            }
+        } catch (Exception e) {
+
+        }
     }
         
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
