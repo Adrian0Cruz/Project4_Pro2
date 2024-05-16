@@ -254,7 +254,7 @@ public class List {
             PrintWriter writer = new PrintWriter(fileName, encoding);
             if ( Empty (  ) ) writer.println("No Hay Nada En La Lista");
             do {
-                writer.println(D.ToString() + "\n///////////////////////////");
+                writer.println ( D.ToString (  ) );
                 D = D.Sig;
             } while (D != Cab);
             writer.close();
@@ -293,8 +293,9 @@ public class List {
                         }
                     }else {
                         JOptionPane.showMessageDialog(null,
-                                "Hay Codigos Iguales: \n"
-                                +"Grado: " + Grade
+                                """
+                                Hay Codigos Iguales: 
+                                Grado: """ + Grade
                                 +"\nEdad: " + Age
                                 +"\nId: " + Id
                                 +"\nNombre: " + Name
@@ -305,5 +306,4 @@ public class List {
             }
         }
     }
-
 }

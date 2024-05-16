@@ -4,9 +4,8 @@ package programacion2_pro4;
 //@author Jesús Hernández
 import Ui.*;
 import java.awt.geom.RoundRectangle2D;
-import java.io.IOException;
 public class Programacion2_Pro4 {
-    public static void main ( String[] args ) throws IOException {
+    public static void main ( String[] args )  {
         System.out.println ( "hello world" );
         Menu M = new Menu (  );
         M.setSize ( 700, 600 );
