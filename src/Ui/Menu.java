@@ -302,6 +302,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void But_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_But_ExitActionPerformed
+        JOptionPane.showMessageDialog(this,
+                "El Archivo Esta En El Escritorio");
         System.exit(0);
     }//GEN-LAST:event_But_ExitActionPerformed
 

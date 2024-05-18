@@ -253,6 +253,7 @@ public class List {
         try {
             PrintWriter writer = new PrintWriter(fileName, encoding);
             if ( Empty (  ) ) writer.println("No Hay Nada En La Lista");
+            writer.println("No Toque Este Archivo");
             do {
                 writer.println ( D.ToString (  ) );
                 D = D.Sig;
