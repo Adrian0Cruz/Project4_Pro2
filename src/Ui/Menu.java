@@ -2,6 +2,7 @@
 //esta clase tambien era para ayudar a Hernán con una vaina de factorial
 package Ui;
 //@author Jesús Hernández
+import Animations.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
@@ -10,6 +11,8 @@ public class Menu extends javax.swing.JFrame {
     View V;
     General G;
     int X, Y;
+    Tweenable T3;
+    Tweenable T4;
     public Menu() {
         initComponents (  );
         R = new Register (  );
@@ -29,9 +32,16 @@ public class Menu extends javax.swing.JFrame {
         V.L2 = R.L;
         G.L3 = R.L;
         
+        T3 = new Tweenable(But_Res);
+        T3.setSmoothness(100);
+        T4 = new Tweenable(But_Vis);
+        T4.setSmoothness(100);
+        
         R.RjButton1().addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent E){
+                T3.tweenSizeAndLocation(new Vector2(195, 28), new Vector2(112, 34), 0.2, Tweenable.Style.OutSine, true);
+                T4.tweenSizeAndLocation(new Vector2(402, 28), new Vector2(116, 34), 0.2, Tweenable.Style.OutSine, true);
                 R.setVisible(false);
                 jPanel2.setVisible(true);
             }
@@ -40,6 +50,8 @@ public class Menu extends javax.swing.JFrame {
         V.RjButton1().addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent E){
+                T4.tweenSizeAndLocation(new Vector2(402, 28), new Vector2(116, 34), 0.2, Tweenable.Style.OutSine, true);
+                T3.tweenSizeAndLocation(new Vector2(195, 28), new Vector2(112, 34), 0.2, Tweenable.Style.OutSine, true);
                 V.setVisible(false);
                 jPanel2.setVisible(true);
             }
@@ -303,6 +315,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void But_ResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_But_ResActionPerformed
+        T3.tweenSizeAndLocation(new Vector2(195, 28), new Vector2(128, 64), 0.2, Tweenable.Style.OutSine, true);
+        T4.tweenSizeAndLocation(new Vector2(402, 28), new Vector2(116, 34), 0.2, Tweenable.Style.OutSine, true);
         jPanel2.setVisible(false);
         V.setVisible(false);
         add(R);
@@ -310,6 +324,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_But_ResActionPerformed
 
     private void But_VisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_But_VisActionPerformed
+        T4.tweenSizeAndLocation(new Vector2(402, 28), new Vector2(128, 64), 0.2, Tweenable.Style.OutSine, true);
+        T3.tweenSizeAndLocation(new Vector2(195, 28), new Vector2(112, 34), 0.2, Tweenable.Style.OutSine, true);
         jPanel2.setVisible(false);
         R.setVisible(false);
         add(V);
