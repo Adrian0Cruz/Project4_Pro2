@@ -246,18 +246,22 @@ public class List {
         return Edad / Cant;
     }
     
-    public void Txt (  ) {
+    public void Txt() {
         String fileName = System.getProperty("user.home") + "\\Desktop\\Informe.txt";
         String encoding = "UTF-8";
         Child D = Cab;
         try {
             PrintWriter writer = new PrintWriter(fileName, encoding);
-            if ( Empty (  ) ) writer.println("No Hay Nada En La Lista");
-            writer.println("No Toque Este Archivo");
-            do {
-                writer.println ( D.ToString (  ) );
-                D = D.Sig;
-            } while (D != Cab);
+            if ( Empty() ) writer.println("No Hay Nada En La Lista");
+            else {
+                writer.println("No Toque Este Archivo");
+                do {
+                    if (D != null) { // Asegúrate de que 'D' no es null antes de llamar a ToString()
+                        writer.println(D.ToString());
+                    }
+                    D = (D != null) ? D.Sig : null; // Avanza a 'D.Sig' solo si 'D' no es null
+                } while (D != Cab && D != null); // Continúa mientras 'D' no sea null y no hayas vuelto al inicio
+            }
             writer.close();
             /*File file = new File(fileName);
             file.setReadOnly();*/
@@ -265,7 +269,7 @@ public class List {
             System.out.println("Ocurrió un error.");
         }
     }
-    
+
     public void Import(JTable tab) throws FileNotFoundException, IOException {
         File file = new File(System.getProperty("user.home") + "/Desktop\\Informe.txt");
         if (file.exists()) {
